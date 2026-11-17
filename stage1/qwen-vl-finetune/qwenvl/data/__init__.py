@@ -4,9 +4,10 @@ import re
 
 VSGUI_TEXT = {
     # "annotation_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/length20_train_text.csv",
-    "annotation_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/scanpath_train.json",
-    "data_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui",
-    "target": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/target2text.json",
+    # "annotation_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/scanpath_train.json",
+    "annotation_path": "/scratch/general/vast/u1442451/SeekUI/data/scanpath_train_think.json",
+    "data_path": "/scratch/general/vast/u1442451/SeekUI/data",
+    "target": "/scratch/general/vast/u1442451/SeekUI/data/target2text.json",
 }
 
 data_dict = {

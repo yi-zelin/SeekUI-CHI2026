@@ -117,6 +117,23 @@ Please strictly follow the format.
 <answer>[{'Position': [x1, y1]}, {'Position': [x2, y2]}, ...]</answer>
 ```
 
+### Multi-reference ScanMatch reward
+
+Multi-reference ScanMatch is enabled by default. Before training, `src/open_r1/grpo.py` adds a `reference_solutions` column to the **training split only**:
+
+- If `target_id` is available, examples are grouped by `image_path + target_id`.
+- Otherwise, they are grouped by `image_path + problem` (the released Stage 2 dataset stores the target text in `problem`).
+- Identical reference solutions are deduplicated, so duplicated dataset rows do not become extra human references.
+- Each completion is scored against every unique reference with `ScanMatchRL`, and the final reward is the arithmetic mean.
+- Tasks with one reference keep the original single-reference behavior.
+- Evaluation/test splits are never used to build training references.
+
+To run the original single-reference reward instead, pass:
+
+```bash
+--multi_reference_scanpath false
+```
+
 ### Data Preparation
 
 1. **Configure image base path** in `build_visgui_dataset.py`:

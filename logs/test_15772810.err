@@ -1,0 +1,113 @@
+You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:16<00:16, 16.68s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:29<00:00, 14.51s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:29<00:00, 14.84s/it]
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+wandb: WARNING The `run_name` is currently set to the same value as `TrainingArguments.output_dir`. If this was not intended, please specify a different run name by setting the `TrainingArguments.run_name` parameter.
+wandb: Tracking run with wandb version 0.21.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+  0%|          | 0/34000 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage1/qwen-vl-finetune/qwenvl/train/train_qwen.py", line 178, in <module>
+    train(attn_implementation="flash_attention_2")
+  File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage1/qwen-vl-finetune/qwenvl/train/train_qwen.py", line 168, in train
+    trainer.train()
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+    return inner_training_loop(
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 2560, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 3782, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/accelerate/accelerator.py", line 2446, in backward
+    self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 275, in backward
+    self.engine.step()
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2249, in step
+    self._take_model_step(lr_kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2152, in _take_model_step
+    self.optimizer.step()
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 18, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 2127, in step
+    self._optimizer_step(sub_group_id)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 986, in _optimizer_step
+    self.optimizer.step()
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 137, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/optimizer.py", line 487, in wrapper
+    out = func(*args, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/adamw.py", line 209, in step
+    has_complex = self._init_group(
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/adamw.py", line 152, in _init_group
+    state["exp_avg_sq"] = torch.zeros_like(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.73 GiB. GPU 0 has a total capacity of 44.42 GiB of which 2.52 GiB is free. Including non-PyTorch memory, this process has 41.89 GiB memory in use. Of the allocated memory 39.50 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage1/qwen-vl-finetune/qwenvl/train/train_qwen.py", line 178, in <module>
+[rank0]:     train(attn_implementation="flash_attention_2")
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage1/qwen-vl-finetune/qwenvl/train/train_qwen.py", line 168, in train
+[rank0]:     trainer.train()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 2560, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 3782, in training_step
+[rank0]:     self.accelerator.backward(loss, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/accelerate/accelerator.py", line 2446, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 275, in backward
+[rank0]:     self.engine.step()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2249, in step
+[rank0]:     self._take_model_step(lr_kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2152, in _take_model_step
+[rank0]:     self.optimizer.step()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 18, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 2127, in step
+[rank0]:     self._optimizer_step(sub_group_id)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 986, in _optimizer_step
+[rank0]:     self.optimizer.step()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 137, in wrapper
+[rank0]:     return func.__get__(opt, opt.__class__)(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/optimizer.py", line 487, in wrapper
+[rank0]:     out = func(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+[rank0]:     ret = func(self, *args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/adamw.py", line 209, in step
+[rank0]:     has_complex = self._init_group(
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/optim/adamw.py", line 152, in _init_group
+[rank0]:     state["exp_avg_sq"] = torch.zeros_like(
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.73 GiB. GPU 0 has a total capacity of 44.42 GiB of which 2.52 GiB is free. Including non-PyTorch memory, this process has 41.89 GiB memory in use. Of the allocated memory 39.50 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+E0923 05:15:35.832000 954152 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 954177) of binary: /uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/bin/python
+Traceback (most recent call last):
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/run.py", line 923, in <module>
+    main()
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+qwenvl/train/train_qwen.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-09-23_05:15:35
+  host      : notch405.ipoib.int.chpc.utah.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 954177)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
