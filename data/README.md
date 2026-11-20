@@ -124,14 +124,43 @@ Multi-reference ScanMatch is enabled by default. Before training, `src/open_r1/g
 - If `target_id` is available, examples are grouped by `image_path + target_id`.
 - Otherwise, they are grouped by `image_path + problem` (the released Stage 2 dataset stores the target text in `problem`).
 - Identical reference solutions are deduplicated, so duplicated dataset rows do not become extra human references.
-- Each completion is scored against every unique reference with `ScanMatchRL`, and the final reward is the arithmetic mean.
+- Each completion is scored against every unique reference with `ScanMatchRL`, and the positive reward is the arithmetic mean.
 - Tasks with one reference keep the original single-reference behavior.
 - Evaluation/test splits are never used to build training references.
+
+### Counterfactual positive/negative references
+
+Counterfactual ScanMatch is also enabled by default. For a task with image `I` and target `t`, human paths from the same image but a different target are attached as `negative_reference_solutions`. These paths are negative only for the current target, not non-human or universally incorrect paths.
+
+For each generated path, the reward computes positive and negative reference means `R+` and `R-`, then applies:
+
+```text
+penalty = max(0, R- + margin - R+)
+reward  = R+ - weight * penalty
+```
+
+The defaults are `weight=0.1` and `margin=0`. With the human gate enabled, a negative task pair is used only when leave-one-out human references from at least one side separate the two tasks with reliability greater than `margin`. Reliability is computed lazily once per task pair and cached in each training process. Tasks without a usable negative reference return exactly the multi-reference positive reward.
+
+Useful settings:
+
+```bash
+# Default counterfactual behavior
+--counterfactual_scanpath true \
+--counterfactual_reward_weight 0.1 \
+--counterfactual_margin 0.0 \
+--counterfactual_human_gate true
+
+# Multi-reference positive reward only
+--counterfactual_scanpath false
+
+# Counterfactual ablation without the human separability gate
+--counterfactual_human_gate false
+```
 
 To run the original single-reference reward instead, pass:
 
 ```bash
---multi_reference_scanpath false
+--multi_reference_scanpath false --counterfactual_scanpath false
 ```
 
 ### Data Preparation

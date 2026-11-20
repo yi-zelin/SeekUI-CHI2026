@@ -1,0 +1,117 @@
+/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/sklearn/base.py:442: InconsistentVersionWarning: Trying to unpickle estimator MeanShift from version 1.7.0 when using version 1.7.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.03s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.38it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.53it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.42it/s]
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+  0%|          | 0/40980 [00:00<?, ?it/s]`generation_config` default values have been modified to match model-specific defaults: {'repetition_penalty': 1.05, 'bos_token_id': 151643, 'eos_token_id': [151645, 151643]}. If this is not desired, please set these values explicitly.
+  0%|          | 1/40980 [00:41<476:41:23, 41.88s/it]                                                       0%|          | 1/40980 [00:41<476:41:23, 41.88s/it][rank0]: Traceback (most recent call last):
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage2/src/seekui/src/open_r1/grpo.py", line 591, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage2/src/seekui/src/open_r1/grpo.py", line 580, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 2560, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/trainer.py", line 3736, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage2/src/seekui/src/open_r1/trainer/grpo_trainer.py", line 604, in compute_loss
+[rank0]:     logps = self._get_per_token_logps(
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/SeekUI/stage2/src/seekui/src/open_r1/trainer/grpo_trainer.py", line 358, in _get_per_token_logps
+[rank0]:     logits = model(input_ids, attention_mask=attention_mask, pixel_values=pixel_values, image_grid_thw=image_grid_thw).logits  # (B, L, V)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 18, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1914, in forward
+[rank0]:     loss = self.module(*inputs, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+[rank0]:     return inner()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1825, in forward
+[rank0]:     outputs = self.model(
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+[rank0]:     return inner()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1171, in forward
+[rank0]:     layer_outputs = decoder_layer(
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+[rank0]:     return inner()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1048, in forward
+[rank0]:     hidden_states = self.mlp(hidden_states)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+[rank0]:     return inner()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 603, in forward
+[rank0]:     down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+[rank0]:     return inner()
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 125, in forward
+[rank0]:     return F.linear(input, self.weight, self.bias)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py", line 116, in zero3_linear_wrap
+[rank0]:     return LinearFunctionForZeroStage3.apply(input, weight)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/autograd/function.py", line 575, in apply
+[rank0]:     return super().apply(*args, **kwargs)  # type: ignore[misc]
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 465, in decorate_fwd
+[rank0]:     return fwd(*args, **kwargs)
+[rank0]:   File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py", line 64, in forward
+[rank0]:     output = input.matmul(weight.t())
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 93.09 GiB of which 4.56 MiB is free. Including non-PyTorch memory, this process has 93.07 GiB memory in use. Of the allocated memory 90.84 GiB is allocated by PyTorch, and 1.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  0%|          | 1/40980 [01:15<855:30:49, 75.16s/it]
+E1119 11:44:58.018000 2113669 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 2113765) of binary: /uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/bin/python
+Traceback (most recent call last):
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/run.py", line 923, in <module>
+    main()
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/uufs/chpc.utah.edu/common/home/u1442451/miniconda3/envs/seekui/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+src/open_r1/grpo.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-19_11:44:58
+  host      : notch501.ipoib.int.chpc.utah.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 2113765)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+srun: error: notch501: task 0: Exited with exit code 1
